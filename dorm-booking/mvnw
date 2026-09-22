@@ -1,0 +1,24 @@
+#!/bin/sh
+set -e
+
+# Maven wrapper script
+
+MAVEN_VERSION=3.8.6
+MVN_CMD="mvn"
+
+if [ -n "$MAVEN_OPTS" ]; then
+  MVN_CMD="$MVN_CMD -DargLine=\"$MAVEN_OPTS\""
+fi
+
+if [ -n "$MAVEN_HOME" ]; then
+  MVN_CMD="$MAVEN_HOME/bin/mvn"
+else
+  if [ -x "$(command -v mvn)" ]; then
+    MVN_CMD="mvn"
+  else
+    echo "Maven is not installed. Please install Maven or set MAVEN_HOME."
+    exit 1
+  fi
+fi
+
+exec "$MVN_CMD" "$@"

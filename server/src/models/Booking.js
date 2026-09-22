@@ -1,12 +1,28 @@
 import mongoose from 'mongoose';
 
-// TODO: define the Booking schema per README.md section 1.
-
-const bookingSchema = new mongoose.Schema(
-  {
-    // TODO
+const bookingSchema = new mongoose.Schema({
+  roomNumber: {
+    type: String,
+    required: true,
   },
-  { timestamps: true }
-);
+  startDate: {
+    type: Date,
+    required: true,
+  },
+  endDate: {
+    type: Date,
+    required: true,
+  },
+  purpose: {
+    type: String,
+    default: '',
+  },
+  bookedBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
+}, { timestamps: true });
 
 export const Booking = mongoose.model('Booking', bookingSchema);
+
